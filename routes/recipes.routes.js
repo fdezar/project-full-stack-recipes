@@ -5,7 +5,7 @@ router.get('/', (req, res) => {
     Recipe.find()
         .then(recipesFound => {
             console.log(recipesFound);
-            res.render('', recipesFound);
+            res.render('recipes/recipes', recipesFound);
         })
         .catch(err => {
             console.log(err);
@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/create', (req, res) => {
-    res.render('');
+    res.render('recipes/new-recipe');
 });
 
 router.post('/create', (req, res) => {
@@ -21,6 +21,9 @@ router.post('/create', (req, res) => {
         .then(recipeCreated => {
             console.log(`The recipe ${recipeCreated.title} has been added:`, recipeCreated);
             // res.redirect('/recipes');
+        })
+        .catch(err => {
+            console.log(err);
         })
 });
 
@@ -49,9 +52,15 @@ router.get('/:id/edit', (req, res) => {
 
 router.post('/:id/edit', (req, res) => {
     const { id } = req.params;
-    const { /* parámetros del modelo */ } = req.body;
+    const { title, description, origin, 
+            image, level, rations, duration,
+            isVegetarian, isVegan, ingredients,
+            steps, user, creationTime, likes } = req.body;
 
-    Recipe.findByIdAndUpdate(id, dataToUpdate, { new: true })
+    Recipe.findByIdAndUpdate(id, { title, description, origin, 
+        image, level, rations, duration,
+        isVegetarian, isVegan, ingredients,
+        steps, user, creationTime, likes }, { new: true })
         .then(recipeUpdated => {
             console.log('Recipe updated:', recipeUpdated);
             // res.redirect('/recipes');
