@@ -1,0 +1,66 @@
+<h2>Edit your recipe</h2>
+<form action="/recipes/create" method="post">
+    <label>Title:
+        <input type="text" name="title" required/>
+    </label>
+    <label>Description:
+        <input type="textarea" name="description"/>
+    </label>
+    <label>Origin:
+        <input type="textarea" name="origin"/>
+    </label>
+    <label>Image: <!-- modificar -->
+        <input type="text" name="title"/>
+    </label>
+    <label>Level:
+        <label>
+            <input type="radio" name="difficulty" value="Easy"/>
+            Easy
+        </label>
+        <label>
+            <input type="radio" name="difficulty" value="Intermediate"/>
+            Intermediate
+        </label>
+        <label>
+            <input type="radio" name="difficulty" value="Advanced"/>
+            Advanced
+        </label>
+    </label>
+    <label>Rations:
+        <input type="number" name="rations" min="1"/>
+    </label>
+    <label>Duration:
+        <input type="number" name="duration" min="0"/>
+        minutes
+    </label>
+    <label>Is vegetarian?:
+        <label>
+            <input type="radio" name="isVegetarian" value="true"/>
+            Yes
+        </label>
+        <label>
+            <input type="radio" name="isVegetarian" value="false"/>
+            No
+        </label>
+    </label>
+    <label>Is vegan?:
+        <label>
+            <input type="radio" name="isVegan" value="true"/>
+            Yes
+        </label>
+        <label>
+            <input type="radio" name="isVegan" value="false"/>
+            No
+        </label>
+    </label>
+    <label>Ingredients:
+        <input type="textarea" name="ingredients" required/>
+    </label>
+    <label>Steps:
+        <input type="textarea" name="steps" required/>
+    </label>
+    
+    
+
+    <button type="submit">Create</button>
+</form>

@@ -27,13 +27,26 @@ router.post('/create', (req, res) => {
         })
 });
 
+router.get('/search', (req, res) => {
+    const myQuery = req.query.query;
+
+    Recipe.find({ title: { $regex: new RegExp(myQuery, 'i')}})
+        .then(recipesFound => {
+            console.log('Recipes found: ', recipesFound)
+            res.render('recipes/recipes-search', { recipesFound });
+        })
+        .catch(err => {
+            console.log(err);
+        })
+});
+
 router.get('/:id', (req, res) => {
     const { id } = req.params;
 
     Recipe.findById(id)
         .then(recipe => {
             console.log('Recipe retrieved:', recipe);
-            res.render('', recipe);
+            res.render('recipes/recipe-details', recipe);
         })
         .catch(err => {
             console.log(err);
@@ -46,7 +59,7 @@ router.get('/:id/edit', (req, res) => {
     Recipe.findById(id)
         .then(recipeFound => {
             console.log('Recipe found:', recipeFound)
-            res.render('', recipeFound);
+            res.render('recipes/edit-recipe', recipeFound);
         })
 });
 

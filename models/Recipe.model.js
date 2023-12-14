@@ -16,7 +16,10 @@ const recipeSchema = new Schema({
         type: String,
         enum: ['Easy', 'Intermediate', 'Advanced']
     },
-    rations: Number,
+    rations: {
+        type: Number,
+        min: 1
+    },
     duration: {
         type: Number,
         min: 0
