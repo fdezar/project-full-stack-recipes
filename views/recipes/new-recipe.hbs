@@ -1,5 +1,5 @@
 <h2>Create your recipe</h2>
-<form action="/recipes/create" method="post">
+<form action="/recipes/create" method="post" enctype="multipart/form-data">
     <label>Title:
         <input type="text" name="title" required/>
     </label>
@@ -9,8 +9,8 @@
     <label>Origin:
         <input type="textarea" name="origin"/>
     </label>
-    <label>Image: <!-- modificar -->
-        <input type="text" name="title"/>
+    <label>Image:
+        <input type="file" name="image"/>
     </label>
     <label>Level:
         <label>
@@ -55,6 +55,7 @@
     </label>
     <label>Ingredients:
         <input type="textarea" name="ingredients" required/>
+        <small>Separate ingredients with commas (e.g, Rice, Tomato)</small>
     </label>
     <label>Steps:
         <input type="textarea" name="steps" required/>

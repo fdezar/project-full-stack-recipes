@@ -1,1 +1,76 @@
-<a>Edit recipe</a>
+<img src={{recipe.image}} alt="recipe-image" />
+
+<h1>{{recipe.title}}</h1>
+
+<img src={{recipe.user.profileImage}} alt="profile-image" />
+<p>{{recipe.user.username}}</p>
+
+<p>{{recipe.description}}</p>
+
+<h3>Ingredients</h3>
+
+<p>{{recipe.duration}}</p>
+<p>{{recipe.rations}}</p>
+
+<ul>
+    {{#each recipe.ingredients}}
+    <li>{{this}}</li>
+    {{/each}}
+</ul>
+
+<p>Hacer un split a un array antes de renderizar el hbs hacer un split del hbs para que sea un array cuando llegue. Hacer la funcion </p>
+
+<h3>Recipe Steps</h3>
+
+<p>{{recipe.steps}}</p>
+
+<h3>Likes</h3>
+
+<h3>Comments</h3>
+
+<!-- edit this -->
+{{#if canEdit }}
+<a href="/recipes/{{recipe._id}}/edit">
+  Edit
+</a>
+<p>You can edit!</p>
+{{/if}}
+
+{{#unless post.comments}}
+  <p>No comments yet!</p>
+{{/unless}}
+ 
+{{#each post.comments}}
+  <p><b>{{this.author.username}}:</b> {{this.content}}</p>
+{{/each}}
+
+<hr>
+
+<a href="/posts/{{post._id}}/edit">Edit</a>
+
+<hr>
+ 
+<h3>Add comment</h3>
+ 
+<form action="/posts/{{post._id}}/comment" method="post">
+  <label> Your username: <br>
+    <select name="author" id="author">
+      {{#each users}}
+        <option value="{{ this.id }}">
+          {{this.username}}
+        </option>
+      {{/each}}
+    </select>
+  </label><br>
+  
+  Comment: <br>
+  {{!-- <input type="text" name="postAuthor" value="{{author.username}}" hidden /> --}}
+  <textarea name="content" cols="30" rows="2"></textarea>
+ <br>
+  <button type="submit">Comment</button>
+</form>
+
+
+<hr>
+<a href="/users/{{author._id}}/posts">See all {{author.username}}'s posts </a>
+

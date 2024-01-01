@@ -1,1 +1,29 @@
-<h2>Welcome X to your profile page!</h2>
+<h2>Welcome {{username}} to your profile page!</h2>
+
+<a href="">Edit Credentials</a>
+<a href="">Delete Account</a>
+
+<img src={{profileImage}} alt="user-icon" />
+
+<div id="credentials">
+    <h3>{{firstName}} {{lastName}}</h3>
+    <p>Username: {{username}}</p>
+    <p>Email: {{email}}</p>
+    <a href="#">Edit profile</a>
+</div>
+
+<div id="my-recipes">
+    <h3>My recipes</h3>
+    <ul>
+    {{#each myRecipes}}
+        <li>{{this}}</li>
+    {{/each}}
+    </ul>
+</div>
+
+<a href="#">Create a new Recipe</a>
+
+<div id="recipes-liked">
+    <h3>Recipes Liked</h3>
+</div>
+

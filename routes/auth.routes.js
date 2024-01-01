@@ -15,17 +15,19 @@ const User = require("../models/User.model");
 const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
 
+const fileUploader = require('../config/cloudinary.config');
+
 // GET /auth/signup
 router.get("/signup", isLoggedOut, (req, res) => {
   res.render("auth/signup");
 });
 
 // POST /auth/signup
-router.post("/signup", isLoggedOut, (req, res) => {
-  const { username, email, password } = req.body;
+router.post("/signup", isLoggedOut, fileUploader.single('profileImage'), (req, res, next) => {
+  const { username, firstName, lastName, email, password } = req.body;
 
   // Check that username, email, and password are provided
-  if (username === "" || email === "" || password === "") {
+  if (username === "" || firstName === "" || lastName === "" || email === "" || password === "") {
     res.status(400).render("auth/signup", {
       errorMessage:
         "All fields are mandatory. Please provide your username, email and password.",
@@ -56,12 +58,25 @@ router.post("/signup", isLoggedOut, (req, res) => {
   */
 
   // Create a new user - start by hashing the password
+
+  const newUser = {
+    username: username,
+    firstName: firstName,
+    lastName: lastName,
+    email: email
+  }
+
+  if (req.hasOwnProperty('file')) {
+    newUser.profileImage = req.file.path;
+  }
+
   bcrypt
     .genSalt(saltRounds)
     .then((salt) => bcrypt.hash(password, salt))
     .then((hashedPassword) => {
+      newUser.password = hashedPassword;
       // Create a user and save it in the database
-      return User.create({ username, email, password: hashedPassword });
+      return User.create(newUser /*  { username, email, password: hashedPassword, profileImage: req.file.path } */ );
     })
     .then((user) => {
       res.redirect("/auth/login");
@@ -87,10 +102,10 @@ router.get("/login", isLoggedOut, (req, res) => {
 
 // POST /auth/login
 router.post("/login", isLoggedOut, (req, res, next) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
   // Check that username, email, and password are provided
-  if (username === "" || password === "") {
+  if (email === "" || password === "") {
     res.status(400).render("auth/login", {
       errorMessage:
         "All fields are mandatory. Please provide username, email and password.",
@@ -134,7 +149,7 @@ router.post("/login", isLoggedOut, (req, res, next) => {
           // Remove the password field
           delete req.session.currentUser.password;
 
-          res.redirect("/");
+          res.redirect("/auth/my-profile");
         })
         .catch((err) => next(err)); // In this case, we send error handling to the error handling middleware.
     })
@@ -153,8 +168,26 @@ router.get("/logout", isLoggedIn, (req, res) => {
   });
 });
 
-router.get("/my-profile", isLoggedIn, (req, res) => {
-  res.render('auth/my-profile');
+router.get("/:id", isLoggedIn, (req, res) => {
+    const { id } = req.params;
+    const { currentUser } = req.session;
+
+    User.findById(id)
+      .populate('myRecipes')
+      .then((user) => {
+        if (user.username === currentUser.username) {
+          res.render('auth/my-profile', user);
+        } else {
+          res.redirect('/recipes');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+
+  // const { currentUser } = req.session;
+  // console.log(req.session);
+  // res.render('auth/my-profile', currentUser);
 });
 
 module.exports = router;

@@ -1,4 +1,17 @@
 <h2>Recipes</h2>
 
+<div id="search-container">
+    <form action="/recipes/search" method="GET">
+        <input type="search" name="query" id="search-bar"/>
+        <button type="submit" id="submit-button">Search</button>
+    </form>
+</div>
+<!-- podría hacer todo dentro de una A y en lugar de un view more 
+que todo sea algo clicable -->
+{{#each recipesFound}}
+    <h2>{{this.title}}</h2>
+    <a href='recipes/{{this._id}}'>View More</a>
+{{/each}}
 <!-- mirar de cómo renderizar pues unas 10 o 20
 y luego poner número debajo -->
+

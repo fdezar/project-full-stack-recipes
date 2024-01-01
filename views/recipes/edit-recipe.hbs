@@ -1,5 +1,5 @@
 <h2>Edit your recipe</h2>
-<form action="/recipes/create" method="post">
+<form action="/recipes/create" method="post" enctype="multipart/form-data">
     <label>Title:
         <input type="text" name="title" required/>
     </label>
@@ -8,9 +8,6 @@
     </label>
     <label>Origin:
         <input type="textarea" name="origin"/>
-    </label>
-    <label>Image: <!-- modificar -->
-        <input type="text" name="title"/>
     </label>
     <label>Level:
         <label>
@@ -60,7 +57,17 @@
         <input type="textarea" name="steps" required/>
     </label>
     
-    
+    <p>Imatge actual</p>
+     <div class="form-group">
+        <label>Image:
+          <input type="file" name="image" class="form-control-file" /> 
+        </label>
+        {{#if image }}
+          <p style="margin:0">Current Image:</p>
+          <img src="{{ image }}" class="img-fluid" alt="">
+          <a href="/recipes/{{id}}/delete">Eliminar Imagen</a>
+        {{/if}}
+      </div>
 
-    <button type="submit">Create</button>
+    <button type="submit">Edit Recipe</button>
 </form>

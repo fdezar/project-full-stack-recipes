@@ -9,6 +9,14 @@ const userSchema = new Schema(
       unique: true,
       trim: true,
     },
+    firstName: {
+      type: String,
+      trim: true
+    },
+    lastName: {
+      type: String,
+      trim: true
+    },
     email: {
       type: String,
       required: true,
@@ -20,14 +28,19 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    image: {
+    profileImage: {
       type: String,
-      default: ""
+      default: "/images/default-icon.png"
     },
-    recipesSaved: {
+    aboutMe: String,
+    myRecipes: [{ 
+      type: Schema.Types.ObjectId, 
+      ref: "Recipe" 
+    }],
+    recipesLiked: [{
       type: Schema.Types.ObjectId,
       ref: 'Recipe'
-    }
+    }]
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
