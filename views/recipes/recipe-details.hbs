@@ -31,32 +31,31 @@
 <!-- edit this -->
 {{#if canEdit }}
 <a href="/recipes/{{recipe._id}}/edit">
-  Edit
+  Edit recipe
 </a>
+<a href="/recipes/{{recipe._id}}/delete">Delete recipe</a>
 <p>You can edit!</p>
 {{/if}}
 
-{{#unless post.comments}}
+{{#unless recipe.comments}}
   <p>No comments yet!</p>
 {{/unless}}
  
-{{#each post.comments}}
+{{#each recipe.comments}}
   <p><b>{{this.author.username}}:</b> {{this.content}}</p>
 {{/each}}
 
 <hr>
 
-<a href="/posts/{{post._id}}/edit">Edit</a>
-
 <hr>
  
 <h3>Add comment</h3>
  
-<form action="/posts/{{post._id}}/comment" method="post">
+<form action="/recipes/{{recipe._id}}/comment" method="post">
   <label> Your username: <br>
     <select name="author" id="author">
       {{#each users}}
-        <option value="{{ this.id }}">
+        <option value="{{ this._id }}">
           {{this.username}}
         </option>
       {{/each}}
@@ -72,5 +71,5 @@
 
 
 <hr>
-<a href="/users/{{author._id}}/posts">See all {{author.username}}'s posts </a>
+<a href="/auth/{{recipe.user._id}}">See {{recipe.user.username}}'s profile </a>
 

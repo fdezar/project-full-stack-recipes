@@ -89,6 +89,10 @@ router.get('/:id', (req, res) => {
         .then(recipe => {
             console.log('Recipe retrieved:', recipe);
 
+            if(!req.session.currentUser) {
+                res.redirect('/auth/signup');
+            }
+
             if (req.session.currentUser._id === recipe.user._id.toString()) {
                 canEdit = true;
             }
@@ -144,16 +148,37 @@ router.post('/:id/edit', isLoggedIn, fileUploader.single('image'), (req, res) =>
         })
 });
 
-router.post('/:id/delete', isLoggedIn, (req, res) => {
+router.get('/:id/delete', (req, res, next) => {
+    const { id } = req.params;
+  
+    Recipe.findByIdAndDelete(id)
+      .then( () => {
+        res.redirect('/recipes')
+      }).catch( err => next(error) );
+  });
+
+router.post('/:id/delete', isLoggedIn, (req, res, next) => {
     const { id } = req.params;
 
     Recipe.findByIdAndDelete(id)
         .then(() => {
-            // res.redirect('/movies'))
+            res.redirect('/recipes');
         })
         .catch(err => {
             next(err);
         })
+});
+
+router.get('/:id/delete-image', (req, res, next) => {
+    const { id } = req.params;
+  
+    Recipe.findOneAndUpdate({ "_id": id }, { image: "/images/default-recipe.png" } )
+      .then( () => {
+        res.redirect(`/recipes/${id}/edit`);
+      })
+      .catch(err => {
+        next(err);
+      })
 });
 
 module.exports = router;

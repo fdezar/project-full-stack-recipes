@@ -1,60 +1,60 @@
 <h2>Edit your recipe</h2>
-<form action="/recipes/create" method="post" enctype="multipart/form-data">
+<form action="/recipes/{{_id}}/edit" method="post" enctype="multipart/form-data">
     <label>Title:
-        <input type="text" name="title" required/>
+        <input type="text" name="title" value="{{title}}" required/>
     </label>
     <label>Description:
-        <input type="textarea" name="description"/>
+        <input type="textarea" name="description" value="{{description}}"/>
     </label>
     <label>Origin:
-        <input type="textarea" name="origin"/>
+        <input type="textarea" name="origin" value="{{origin}}"/>
     </label>
     <label>Level:
         <label>
-            <input type="radio" name="difficulty" value="Easy"/>
+            <input type="radio" name="level" value="Easy" />
             Easy
         </label>
         <label>
-            <input type="radio" name="difficulty" value="Intermediate"/>
+            <input type="radio" name="level" value="Intermediate" />
             Intermediate
         </label>
         <label>
-            <input type="radio" name="difficulty" value="Advanced"/>
+            <input type="radio" name="level" value="Advanced" />
             Advanced
         </label>
     </label>
     <label>Rations:
-        <input type="number" name="rations" min="1"/>
+        <input type="number" name="rations" min="1" value="{{rations}}"/>
     </label>
     <label>Duration:
-        <input type="number" name="duration" min="0"/>
+        <input type="number" name="duration" min="0" value="{{duration}}"/>
         minutes
     </label>
     <label>Is vegetarian?:
         <label>
-            <input type="radio" name="isVegetarian" value="true"/>
+            <input type="radio" name="isVegetarian" value="true" {{#if isVegetarian}}checked{{/if}}>
             Yes
         </label>
         <label>
-            <input type="radio" name="isVegetarian" value="false"/>
+            <input type="radio" name="isVegetarian" value="false" {{#unless isVegetarian}}checked{{/unless}}>
             No
         </label>
     </label>
     <label>Is vegan?:
         <label>
-            <input type="radio" name="isVegan" value="true"/>
+            <input type="radio" name="isVegan" value="true" {{#if isVegan}}checked{{/if}}/>
             Yes
         </label>
         <label>
-            <input type="radio" name="isVegan" value="false"/>
+            <input type="radio" name="isVegan" value="false" {{#unless isVegan}}checked{{/unless}}/>
             No
         </label>
     </label>
     <label>Ingredients:
-        <input type="textarea" name="ingredients" required/>
+        <input type="textarea" name="ingredients" value="{{ingredients}}" required/>
     </label>
     <label>Steps:
-        <input type="textarea" name="steps" required/>
+        <input type="textarea" name="steps" value="{{steps}}" required/>
     </label>
     
     <p>Imatge actual</p>
@@ -64,8 +64,8 @@
         </label>
         {{#if image }}
           <p style="margin:0">Current Image:</p>
-          <img src="{{ image }}" class="img-fluid" alt="">
-          <a href="/recipes/{{id}}/delete">Eliminar Imagen</a>
+          <img src="{{image}}" class="img-fluid" alt="">
+          <a href="/recipes/{{_id}}/delete-image">Eliminar Imagen</a>
         {{/if}}
       </div>
 
