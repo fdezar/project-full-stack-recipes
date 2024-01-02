@@ -86,6 +86,7 @@ router.get('/:id', (req, res) => {
 
     Recipe.findById(id)
         .populate("user")
+        .populate("comments")
         .then(recipe => {
             console.log('Recipe retrieved:', recipe);
 
