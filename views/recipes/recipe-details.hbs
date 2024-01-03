@@ -7,6 +7,15 @@
 
 <p>{{recipe.description}}</p>
 
+<!-- edit this -->
+{{#if canEdit }}
+<a href="/recipes/{{recipe._id}}/edit">
+  Edit recipe
+</a>
+<a href="/recipes/{{recipe._id}}/delete">Delete recipe</a>
+<p>You can edit!</p>
+{{/if}}
+
 <h3>Ingredients</h3>
 
 <p>{{recipe.duration}}</p>
@@ -26,16 +35,8 @@
 
 <h3>Likes</h3>
 
-
-
-<!-- edit this -->
-{{#if canEdit }}
-<a href="/recipes/{{recipe._id}}/edit">
-  Edit recipe
-</a>
-<a href="/recipes/{{recipe._id}}/delete">Delete recipe</a>
-<p>You can edit!</p>
-{{/if}}
+<p>Likes received:</p>
+<a href="#">Like this recipe</a>
 
 <h3>Comments</h3>
 
