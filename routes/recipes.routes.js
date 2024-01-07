@@ -143,6 +143,7 @@ router.post('/:id/edit', isLoggedIn, fileUploader.single('image'), (req, res) =>
         duration: duration,
         isVegetarian: isVegetarian,
         isVegan: isVegan,
+        ingredients: ingredients,
         steps: steps,
         user: user,
         creationTime: creationTime,
