@@ -1,4 +1,4 @@
-<h2>Edit your recipe</h2>
+{{!-- <h2>Edit your recipe</h2>
 <form action="/recipes/{{_id}}/edit" method="post" enctype="multipart/form-data">
     <label>Title:
         <input type="text" name="title" value="{{title}}" required/>
@@ -70,4 +70,121 @@
       </div>
 
     <button type="submit">Edit Recipe</button>
-</form>
+</form> --}}
+
+<div class="container mt-5">
+    <div id="form" class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        <h2>Edit your recipe</h2>
+        <form action="/recipes/{{_id}}/edit" method="post" enctype="multipart/form-data">
+
+            <!-- Title -->
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" class="form-control" id="title" name="title" value="{{title}}" required>
+            </div>
+
+            <!-- Description -->
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea class="form-control" id="description" name="description">{{description}}</textarea>
+            </div>
+
+            <!-- Origin -->
+            <div class="form-group">
+                <label for="origin">Origin:</label>
+                <textarea class="form-control" id="origin" name="origin">{{origin}}</textarea>
+            </div>
+
+            <!-- Image -->
+            <div class="form-group">
+                <label for="image">Image:</label>
+                <input type="file" class="form-control-file" id="image" name="image">
+            </div>
+
+            <!-- Level -->
+            <div class="form-group">
+                <label>Level:</label>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" name="level" value="Easy" />
+                    <label class="form-check-label">Easy</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" name="level" value="Intermediate" />
+                    <label class="form-check-label">Intermediate</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" name="level" value="Advanced" />
+                    <label class="form-check-label">Advanced</label>
+                </div>
+            </div>
+
+            <!-- Rations -->
+            <div class="form-group">
+                <label for="rations">Rations:</label>
+                <input type="number" class="form-control" id="rations" name="rations" min="1" value="{{rations}}">
+            </div>
+
+            <!-- Duration -->
+            <div class="form-group">
+                <label for="duration">Duration:</label>
+                <div class="input-group">
+                    <input type="number" class="form-control" id="duration" name="duration" min="0" value="{{duration}}">
+                    <div class="input-group-append">
+                        <span class="input-group-text">minutes</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Is vegetarian? -->
+            <div class="form-group">
+                <label>Is vegetarian?:</label>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" name="isVegetarian" value="true" {{#if isVegetarian}}checked{{/if}}>
+                    <label class="form-check-label">Yes</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" name="isVegetarian" value="false" {{#unless isVegetarian}}checked{{/unless}}>
+                    <label class="form-check-label">No</label>
+                </div>
+            </div>
+
+            <!-- Is vegan? -->
+            <div class="form-group">
+                <label>Is vegan?:</label>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" name="isVegan" value="true" {{#if isVegan}}checked{{/if}}>
+                    <label class="form-check-label">Yes</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" name="isVegan" value="false" {{#unless isVegan}}checked{{/unless}}>
+                    <label class="form-check-label">No</label>
+                </div>
+            </div>
+
+            <!-- Ingredients -->
+            <div class="form-group">
+                <label for="ingredients">Ingredients:</label>
+                <input type="text" class="form-control" id="ingredients" name="ingredients" value="{{ingredients}}" required>
+            </div>
+
+            <!-- Steps -->
+            <div class="form-group">
+                <label for="steps">Steps:</label>
+                <textarea class="form-control" id="steps" name="steps" required>{{steps}}</textarea>
+            </div>
+
+            <!-- Current Image -->
+            <p>Current Image:</p>
+            <div class="form-group">
+                <label for="image">Image:</label>
+                <input type="file" class="form-control-file" id="image" name="image">
+            </div>
+            {{#if image }}
+                <img src="{{image}}" class="img-fluid" alt="">
+                <a href="/recipes/{{_id}}/delete-image">Delete Image</a>
+            {{/if}}
+
+            <button type="submit" class="btn btn-primary btn-block">Edit Recipe</button>
+        </form>
+    </div>
+</div>

@@ -1,12 +1,4 @@
-<h2>Recipes</h2>
-
-<div id="search-container">
-    <form action="/recipes/search" method="GET">
-        <input type="search" name="query" id="search-bar"/>
-        <button type="submit" id="submit-button">Search</button>
-    </form>
-</div>
-
+<head>
    <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -23,8 +15,7 @@
       }
     </style>
 
-    
-  </head>
+</head>
   <body>
     
 <main>
@@ -32,12 +23,20 @@
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">Album example</h1>
-        <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-        <p>
-          <a href="#" class="btn btn-primary my-2">Main call to action</a>
-          <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-        </p>
+        <h1 class="fw-light">Recipes</h1>
+        <p class="lead text-muted">Explore a world of culinary delights with our carefully curated recipes. Each dish is crafted with love and precision.</p>
+        {{!-- <form action="/recipes/search" method="GET">
+            <input type="search" name="query" id="search-bar"/>
+            <button type="submit" id="submit-button" class="btn btn-primary my-2">Search</button>
+        </form> --}}
+         <form action="/recipes/search" method="GET" class="form-inline">
+          <div class="input-group">
+            <input type="search" class="form-control" placeholder="Search some recipes..." name="query" id="search-bar"/>
+            <button type="submit" id="submit-button" class="btn btn-primary">Search</button>
+            {{!-- <div class="input-group-append">
+            </div> --}}
+          </div>
+        </form>
       </div>
     </div>
   </section>
@@ -49,10 +48,17 @@
         {{#each recipesFound}}  
         <div class="col">
           <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">{{this.title}}</text></svg>
+            {{!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"> --}}
+                <title>Placeholder</title>
+                <!-- <rect width="100%" height="100%" fill="#55595c"/> -->
+                <img src="{{this.image}}" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" />
+                <text x="50%" y="50%" fill="#eceeef" dy=".3em"></text>
+            
+            </svg>
 
             <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <h5><strong>{{this.title}}</strong></h5>
+              <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-secondary"><a href="recipes/{{this._id}}">Details</a></button>

@@ -1,4 +1,4 @@
-body {
+/* body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
@@ -13,4 +13,58 @@ h1 {
 
 img {
   width: 25%;
+} */
+
+/* Add your custom styles here */
+body {
+  background-color: #f8f9fa;
+}
+
+.container {
+  margin-top: 20px;
+}
+
+.card {
+  margin-top: 20px;
+}
+
+.card-img-top {
+  max-height: 200px;
+  object-fit: cover;
+}
+
+.rounded-circle {
+  width: 50px;
+  height: 50px;
+}
+
+.list-group-item {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.list-group-item:hover {
+  background-color: #f8f9fa;
+}
+
+.btn {
+  margin-top: 10px;
+}
+
+#search-bar {
+  height: 38px; /* Adjust this value as needed */
+}
+
+#submit-button {
+  margin: 0;
+}
+
+/* Add more styles as needed */
+
+/* Responsive Styles */
+@media (max-width: 576px) {
+  .rounded-circle {
+      width: 40px;
+      height: 40px;
+  }
 }

@@ -12,13 +12,17 @@ const Comment = require("../models/Comment.model");
 router.post('/:recipeId/comment', (req, res, next) => {
   
   const { recipeId } = req.params;
-  const { author, content } = req.body;
+  const { _id } = req.session.currentUser;
+  const { content } = req.body;
 
-  Comment.create({
-    author: author,
-    content: content 
-  }).then( newComment => {
-    return Recipe.findByIdAndUpdate(recipeId, { $push: { comments: newComment._id } })
+  const newComment = {
+    content: content
+  }
+  newComment.author = _id;
+
+  Comment.create(newComment)
+  .then( newCommentCreated => {
+    return Recipe.findByIdAndUpdate(recipeId, { $push: { comments: newCommentCreated._id } })
   }).then( () => {
     res.redirect(`/recipes/${recipeId}`)
   })

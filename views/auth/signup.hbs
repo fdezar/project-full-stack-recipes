@@ -1,4 +1,4 @@
-<div id="form">
+{{!-- <div id="form">
   <h2>Sign Up</h2>
   <form action="/auth/signup" method="POST" enctype="multipart/form-data">
 
@@ -35,7 +35,11 @@
   </form>
 </div>
 
-<form class="row g-3 container-fluid">
+<form class="row g-3 container-fluid" <!-- añadir cositas -->>
+  <div class="input-group flex-nowrap col-6">
+    <span class="input-group-text" id="addon-wrapping">@</span>
+    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+  </div>
   <div class="col-6">
     <label for="inputEmail4" class="form-label">Username</label>
     <input type="email" class="form-control" id="inputEmail4" >
@@ -56,7 +60,60 @@
     <label for="inputAddress2" class="form-label">Last Name</label>
     <input type="text" class="form-control" id="inputAddress2" placeholder="Doe">
   </div>
+  <div class="mb-3">
+  <label for="formFile" class="form-label">Default file input example</label>
+  <input class="form-control" type="file" id="formFile">
+</div>
+  <div class="input-group">
+  <span class="input-group-text">First and last name</span>
+  <input type="text" aria-label="First name" class="form-control">
+  <input type="text" aria-label="Last name" class="form-control">
+</div>
   <div class="col-12">
     <button type="submit" class="btn btn-primary">Sign in</button>
   </div>
-</form>
+</form> --}}
+
+<div class="container mt-5">
+    <div id="form" class="col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+        <h2 class="text-center">Sign Up</h2>
+        <form action="/auth/signup" method="POST" enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Your email">
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Your username">
+            </div>
+
+            <div class="form-group">
+                <label for="firstName">Name:</label>
+                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Your name">
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Your last name">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Your password">
+            </div>
+
+            <div class="form-group">
+                <label for="profileImage">Profile Image:</label>
+                <input type="file" class="form-control-file" id="profileImage" name="profileImage">
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+
+            {{#if errorMessage}}
+                <p class="error mt-3">{{errorMessage}}</p>
+            {{/if}}
+        </form>
+    </div>
+</div>

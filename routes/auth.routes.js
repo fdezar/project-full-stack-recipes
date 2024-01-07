@@ -190,4 +190,81 @@ router.get("/:id", isLoggedIn, (req, res) => {
   // res.render('auth/my-profile', currentUser);
 });
 
+router.get('/:id/edit', isLoggedIn, (req, res) => {
+  const { id } = req.params;
+  
+  User.findById(id)
+      .then(userFound => {
+          console.log('Recipe found:', userFound)
+          res.render('recipes/edit-recipe', userFound);
+      })
+});
+
+router.post('/:id/edit', isLoggedIn, fileUploader.single('image'), (req, res) => {
+  const { id } = req.params;
+  const { title, description, origin, 
+          image, level, rations, duration,
+          isVegetarian, isVegan, ingredients,
+          steps, user, creationTime, likes, comments } = req.body;
+
+  const updatedUser = {
+      title: title,
+      description: description,
+      origin: origin,
+      level: level,
+      rations: rations,
+      duration: duration,
+      isVegetarian: isVegetarian,
+      isVegan: isVegan,
+      steps: steps,
+      user: user,
+      creationTime: creationTime,
+      likes: likes,
+      comments: comments
+  }
+
+  if (req.hasOwnProperty('file')) {
+      updatedRecipe.image = req.file.path;
+  }
+
+  Recipe.findByIdAndUpdate(id, updatedRecipe, { new: true })
+      .then(recipeUpdated => {
+          console.log('Recipe updated:', recipeUpdated);
+          res.redirect(`/recipes/${id}`);
+      })
+});
+
+router.get('/:id/delete', (req, res, next) => {
+  const { id } = req.params;
+
+  User.findByIdAndDelete(id)
+    .then( () => {
+      res.redirect('/')
+    }).catch( err => next(error) );
+});
+
+router.post('/:id/delete', isLoggedIn, (req, res, next) => {
+  const { id } = req.params;
+
+  Recipe.findByIdAndDelete(id)
+      .then(() => {
+          res.redirect('/');
+      })
+      .catch(err => {
+          next(err);
+      })
+});
+
+router.get('/:id/delete-image', (req, res, next) => {
+  const { id } = req.params;
+
+  Recipe.findOneAndUpdate({ "_id": id }, { image: "/images/default-recipe.png" } )
+    .then( () => {
+      res.redirect(`/recipes/${id}/edit`);
+    })
+    .catch(err => {
+      next(err);
+    })
+});
+
 module.exports = router;

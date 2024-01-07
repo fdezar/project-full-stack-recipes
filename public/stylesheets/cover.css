@@ -22,6 +22,7 @@ body {
 
 .cover-container {
   max-width: 42em;
+  text-shadow: .1rem .1rem .1rem rgba(0, 0, 0, 5);
 }
 
 

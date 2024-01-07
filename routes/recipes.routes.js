@@ -87,6 +87,18 @@ router.get('/:id', (req, res) => {
     Recipe.findById(id)
         .populate("user")
         .populate("comments")
+        // .populate({
+        //     path: "author",
+        //     select: "username -_id"
+        // })
+        // .populate({
+        //     path: "comments",
+        //     select: "content -_id",
+        //     populate: {
+        //         path: "author",
+        //         select: "username -_id"
+        //     }
+        // })
         .then(recipe => {
             console.log('Recipe retrieved:', recipe);
 

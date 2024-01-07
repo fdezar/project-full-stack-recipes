@@ -1,4 +1,4 @@
-<h2>Welcome {{username}} to your profile page!</h2>
+{{!-- <h2>Welcome {{username}} to your profile page!</h2>
 
 <a href="">Edit Credentials</a>
 <a href="">Delete Account</a>
@@ -16,7 +16,10 @@
     <h3>My recipes</h3>
     <ul>
     {{#each myRecipes}}
-        <li>{{this}}</li>
+        <li>
+            <a href="/recipes/{{this._id}}"><p>{{this.title}}</p></a>
+            
+        </li>
     {{/each}}
     </ul>
 </div>
@@ -27,4 +30,49 @@
     <h3>Recipes Liked</h3>
 </div>
 
-<a href="#">See new recipes!</a>
+<a href="#">See new recipes!</a> --}}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Welcome {{username}} to your profile page!</h2>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="{{profileImage}}" class="card-img-top rounded-circle" alt="user-icon">
+                <div class="card-body">
+                    <h3 class="card-title">{{firstName}} {{lastName}}</h3>
+                    <p class="card-text">Username: {{username}}</p>
+                    <p class="card-text">Email: {{email}}</p>
+                    <a href="#" class="btn btn-primary">Edit Profile</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">My recipes</h3>
+                    <ul class="list-group">
+                        {{#each myRecipes}}
+                            <li class="list-group-item">
+                                <a href="/recipes/{{this._id}}">
+                                    <p>{{this.title}}</p>
+                                </a>
+                            </li>
+                        {{/each}}
+                    </ul>
+                    <a href="#" class="btn btn-success mt-3">Create a new Recipe</a>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h3 class="card-title">Recipes Liked</h3>
+                    <!-- Add content for liked recipes as needed -->
+                </div>
+            </div>
+
+            <a href="#" class="btn btn-info mt-4 btn-block">See new recipes!</a>
+        </div>
+    </div>
+</div>
