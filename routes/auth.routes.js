@@ -196,41 +196,34 @@ router.get('/:id/edit', isLoggedIn, (req, res) => {
   User.findById(id)
       .then(userFound => {
           console.log('Recipe found:', userFound)
-          res.render('recipes/edit-recipe', userFound);
+          res.render('auth/edit-profile', userFound);
       })
 });
 
 router.post('/:id/edit', isLoggedIn, fileUploader.single('image'), (req, res) => {
   const { id } = req.params;
-  const { title, description, origin, 
-          image, level, rations, duration,
-          isVegetarian, isVegan, ingredients,
-          steps, user, creationTime, likes, comments } = req.body;
+  const { username, firstName, lastName, email,
+          password, aboutMe, myRecipes, recipesLiked } = req.body;
 
   const updatedUser = {
-      title: title,
-      description: description,
-      origin: origin,
-      level: level,
-      rations: rations,
-      duration: duration,
-      isVegetarian: isVegetarian,
-      isVegan: isVegan,
-      steps: steps,
-      user: user,
-      creationTime: creationTime,
-      likes: likes,
-      comments: comments
+      username: username,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+      aboutMe: aboutMe,
+      myRecipes: myRecipes,
+      recipesLiked: recipesLiked
   }
 
   if (req.hasOwnProperty('file')) {
-      updatedRecipe.image = req.file.path;
+      updatedUser.profileImage = req.file.path;
   }
 
-  Recipe.findByIdAndUpdate(id, updatedRecipe, { new: true })
-      .then(recipeUpdated => {
-          console.log('Recipe updated:', recipeUpdated);
-          res.redirect(`/recipes/${id}`);
+  User.findByIdAndUpdate(id, updatedUser, { new: true })
+      .then(userUpdated => {
+          console.log('User updated:', userUpdated);
+          res.redirect(`/auth/${id}`);
       })
 });
 
@@ -246,7 +239,7 @@ router.get('/:id/delete', (req, res, next) => {
 router.post('/:id/delete', isLoggedIn, (req, res, next) => {
   const { id } = req.params;
 
-  Recipe.findByIdAndDelete(id)
+  User.findByIdAndDelete(id)
       .then(() => {
           res.redirect('/');
       })
@@ -258,9 +251,9 @@ router.post('/:id/delete', isLoggedIn, (req, res, next) => {
 router.get('/:id/delete-image', (req, res, next) => {
   const { id } = req.params;
 
-  Recipe.findOneAndUpdate({ "_id": id }, { image: "/images/default-recipe.png" } )
+  User.findOneAndUpdate({ "_id": id }, { profileImage: "/images/default-icon.png" } )
     .then( () => {
-      res.redirect(`/recipes/${id}/edit`);
+      res.redirect(`/auth/${id}/edit`);
     })
     .catch(err => {
       next(err);

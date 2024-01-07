@@ -77,31 +77,26 @@
         <h2>Edit your recipe</h2>
         <form action="/recipes/{{_id}}/edit" method="post" enctype="multipart/form-data">
 
-            <!-- Title -->
             <div class="form-group">
                 <label for="title">Title:</label>
                 <input type="text" class="form-control" id="title" name="title" value="{{title}}" required>
             </div>
 
-            <!-- Description -->
             <div class="form-group">
                 <label for="description">Description:</label>
                 <textarea class="form-control" id="description" name="description">{{description}}</textarea>
             </div>
 
-            <!-- Origin -->
             <div class="form-group">
                 <label for="origin">Origin:</label>
                 <textarea class="form-control" id="origin" name="origin">{{origin}}</textarea>
             </div>
 
-            <!-- Image -->
             <div class="form-group">
                 <label for="image">Image:</label>
                 <input type="file" class="form-control-file" id="image" name="image">
             </div>
 
-            <!-- Level -->
             <div class="form-group">
                 <label>Level:</label>
                 <div class="form-check">
@@ -118,13 +113,11 @@
                 </div>
             </div>
 
-            <!-- Rations -->
             <div class="form-group">
                 <label for="rations">Rations:</label>
                 <input type="number" class="form-control" id="rations" name="rations" min="1" value="{{rations}}">
             </div>
 
-            <!-- Duration -->
             <div class="form-group">
                 <label for="duration">Duration:</label>
                 <div class="input-group">
@@ -135,7 +128,6 @@
                 </div>
             </div>
 
-            <!-- Is vegetarian? -->
             <div class="form-group">
                 <label>Is vegetarian?:</label>
                 <div class="form-check">
@@ -148,7 +140,6 @@
                 </div>
             </div>
 
-            <!-- Is vegan? -->
             <div class="form-group">
                 <label>Is vegan?:</label>
                 <div class="form-check">
@@ -161,19 +152,16 @@
                 </div>
             </div>
 
-            <!-- Ingredients -->
             <div class="form-group">
                 <label for="ingredients">Ingredients:</label>
                 <input type="text" class="form-control" id="ingredients" name="ingredients" value="{{ingredients}}" required>
             </div>
 
-            <!-- Steps -->
             <div class="form-group">
                 <label for="steps">Steps:</label>
                 <textarea class="form-control" id="steps" name="steps" required>{{steps}}</textarea>
             </div>
 
-            <!-- Current Image -->
             <p>Current Image:</p>
             <div class="form-group">
                 <label for="image">Image:</label>
