@@ -200,7 +200,7 @@ router.get('/:id/edit', isLoggedIn, (req, res) => {
       })
 });
 
-router.post('/:id/edit', isLoggedIn, fileUploader.single('image'), (req, res) => {
+router.post('/:id/edit', isLoggedIn, fileUploader.single('profileImage'), (req, res) => {
   const { id } = req.params;
   const { username, firstName, lastName, email,
           password, aboutMe, myRecipes, recipesLiked } = req.body;
@@ -215,6 +215,8 @@ router.post('/:id/edit', isLoggedIn, fileUploader.single('image'), (req, res) =>
       myRecipes: myRecipes,
       recipesLiked: recipesLiked
   }
+
+  // poner que si no hay mandatory fields pues que esté mal
 
   if (req.hasOwnProperty('file')) {
       updatedUser.profileImage = req.file.path;

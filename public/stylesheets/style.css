@@ -55,6 +55,8 @@ a {
 
 .container {
   margin-top: 20px;
+  padding-top: 60px;
+  padding-bottom: 60px;
 }
 
 .card {
@@ -82,12 +84,15 @@ a {
 
 .btn {
   margin-top: 10px;
+}
+
+.btn:not(.exclude-btn) {
   background-color: var(--red-color);
   color: var(--white-color);
   border: none;
 }
 
-.btn:hover {
+.btn:hover:not(.exclude-btn) {
   background-color: #333;
 }
 
@@ -95,8 +100,33 @@ a {
   height: 38px; /* Adjust this value as needed */
 }
 
+#album-div {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+#image-recipe-container {
+  overflow: hidden;
+  height: 250px;
+}
+
+#recipes-images {
+  transform: scale(1.3);
+  transform-origin: 50% 50%;
+}
+
 #submit-button {
   margin: 0;
+}
+
+#user-icon {
+  margin: 20px 0 0 15px;
+  height: 8rem;
+  width: 8rem;
+}
+
+#my-recipe {
+  color: black;
 }
 
 /* Add more styles as needed */

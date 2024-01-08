@@ -79,7 +79,8 @@
 
             <div class="d-flex align-items-center">
                 <img src="{{recipe.user.profileImage}}" class="img-fluid rounded-circle" alt="profile-image">
-                <p class="ml-2">{{recipe.user.username}}</p>
+                <p>{{recipe.user.firstName}} {{recipe.user.lastName}}</p>
+                <p class="ml-2">@{{recipe.user.username}}</p>
             </div>
 
             <p>{{recipe.description}}</p>
@@ -90,11 +91,7 @@
             {{/if}}
 
             <h3>Ingredients</h3>
-            <ul>
-                {{#each recipe.ingredients}}
-                    <li>{{this}}</li>
-                {{/each}}
-            </ul>
+            <p>{{recipe.ingredients}}</p>
 
             <h3>Duration</h3>
             <p>{{recipe.duration}} minutes</p>
@@ -105,9 +102,9 @@
             <h3>Recipe Steps</h3>
             <p>{{recipe.steps}}</p>
 
-            <h3>Likes</h3>
+            {{!-- <h3>Likes</h3>
             <p>Likes received:</p>
-            <a href="#" class="btn btn-success">Like this recipe</a>
+            <a href="#" class="btn btn-success">Like this recipe</a> --}}
 
             <h3>Comments</h3>
             {{#unless recipe.comments}}

@@ -38,13 +38,13 @@
     <div class="row">
         <div class="col-md-4">
             <div class="card mb-4">
-                <img src="{{profileImage}}" class="card-img-top rounded-circle" alt="user-icon">
+                <img src="{{profileImage}}" id="user-icon" class="card-img-top rounded-circle" alt="user-icon">
                 <div class="card-body">
                     <h3 class="card-title">{{firstName}} {{lastName}}</h3>
                     <p class="card-text">@{{username}}</p>
                     <p class="card-text">{{email}}</p>
-                    <a href="/auth/{{_id}}/edit" class="btn btn-primary">Edit Profile</a>
-                    <a href="/auth/{{_id}}/delete" class="btn btn-danger">Delete Profile</a>
+                    <a href="/auth/{{_id}}/edit" class="btn btn-outline-dark exclude-btn">Edit Profile</a>
+                    <a href="/auth/{{_id}}/delete" class="btn btn-outline-danger exclude-btn">Delete Profile</a>
                 </div>
             </div>
         </div>
@@ -56,7 +56,7 @@
                     <ul class="list-group">
                         {{#each myRecipes}}
                             <li class="list-group-item">
-                                <a href="/recipes/{{this._id}}">
+                                <a id="my-recipes" href="/recipes/{{this._id}}">
                                     <p>{{this.title}}</p>
                                 </a>
                             </li>
@@ -66,14 +66,14 @@
                 </div>
             </div>
 
-            <div class="card mt-4">
+            {{!-- <div class="card mt-4">
                 <div class="card-body">
                     <h3 class="card-title">Recipes Liked</h3>
-                    <!-- Add content for liked recipes as needed -->
+                    
                 </div>
-            </div>
+            </div> --}}
 
-            <a href="#" class="btn btn-info mt-4 btn-block">See new recipes!</a>
+            <a href="#" class="btn btn-primary mt-4 btn-block">See new recipes!</a>
         </div>
     </div>
 </div>
