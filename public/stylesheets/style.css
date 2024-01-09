@@ -119,14 +119,30 @@ a {
   margin: 0;
 }
 
+#back-to-top {
+  color: #333;
+}
+
 #user-icon {
   margin: 20px 0 0 15px;
   height: 8rem;
   width: 8rem;
 }
 
-#my-recipe {
-  color: black;
+.profile-description {
+  margin-bottom: 0;
+}
+
+#my-recipes-title {
+  padding-bottom: 0.5rem;
+}
+
+#my-profile-my-recipes {
+  color: #333;
+}
+
+.my-profile-recipe {
+  margin-bottom: 0;
 }
 
 /* Add more styles as needed */

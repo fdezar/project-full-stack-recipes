@@ -96,31 +96,26 @@
         <h2>Create your recipe</h2>
         <form action="/recipes/create" method="post" enctype="multipart/form-data">
 
-            <!-- Title -->
             <div class="form-group">
                 <label for="title">Title:</label>
                 <input type="text" class="form-control" id="title" name="title" required>
             </div>
 
-            <!-- Description -->
             <div class="form-group">
                 <label for="description">Description:</label>
-                <textarea class="form-control" id="description" name="description"></textarea>
+                <textarea class="form-control" rows="5" id="description" name="description"></textarea>
             </div>
 
-            <!-- Origin -->
             <div class="form-group">
                 <label for="origin">Origin:</label>
-                <textarea class="form-control" id="origin" name="origin"></textarea>
+                <textarea class="form-control" rows="2" id="origin" name="origin"></textarea>
             </div>
 
-            <!-- Image -->
             <div class="form-group">
                 <label for="image">Image:</label>
                 <input type="file" class="form-control-file" id="image" name="image">
             </div>
 
-            <!-- Level -->
             <div class="form-group">
                 <label>Level:</label>
                 <div class="form-check">
@@ -137,13 +132,11 @@
                 </div>
             </div>
 
-            <!-- Rations -->
             <div class="form-group">
                 <label for="rations">Rations:</label>
                 <input type="number" class="form-control" id="rations" name="rations" min="1">
             </div>
 
-            <!-- Duration -->
             <div class="form-group">
                 <label for="duration">Duration:</label>
                 <div class="input-group">
@@ -154,7 +147,6 @@
                 </div>
             </div>
 
-            <!-- Is vegetarian? -->
             <div class="form-group">
                 <label>Is vegetarian?:</label>
                 <div class="form-check">
@@ -167,7 +159,6 @@
                 </div>
             </div>
 
-            <!-- Is vegan? -->
             <div class="form-group">
                 <label>Is vegan?:</label>
                 <div class="form-check">
@@ -180,17 +171,15 @@
                 </div>
             </div>
 
-            <!-- Ingredients -->
             <div class="form-group">
                 <label for="ingredients">Ingredients:</label>
-                <input type="text" class="form-control" id="ingredients" name="ingredients" required>
+                <textarea rows="7" class="form-control" id="ingredients" name="ingredients" required></textarea>
                 <small class="form-text text-muted">Separate ingredients with commas (e.g., Rice, Tomato)</small>
             </div>
 
-            <!-- Steps -->
             <div class="form-group">
                 <label for="steps">Steps:</label>
-                <textarea class="form-control" id="steps" name="steps" required></textarea>
+                <textarea class="form-control" rows="10" id="steps" name="steps" required></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary btn-block">Create</button>

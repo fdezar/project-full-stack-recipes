@@ -41,8 +41,8 @@
                 <img src="{{profileImage}}" id="user-icon" class="card-img-top rounded-circle" alt="user-icon">
                 <div class="card-body">
                     <h3 class="card-title">{{firstName}} {{lastName}}</h3>
-                    <p class="card-text">@{{username}}</p>
-                    <p class="card-text">{{email}}</p>
+                    <p class="card-text profile-description">@{{username}}</p>
+                    <p class="card-text profile-description">{{email}}</p>
                     <a href="/auth/{{_id}}/edit" class="btn btn-outline-dark exclude-btn">Edit Profile</a>
                     <a href="/auth/{{_id}}/delete" class="btn btn-outline-danger exclude-btn">Delete Profile</a>
                 </div>
@@ -52,12 +52,20 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-                    <h3 class="card-title">My recipes</h3>
+                    <h3 class="card-title" id="my-recipes-title">About</h3>
+                    <p>{{aboutMe}}</p>
+                </div>
+            </div>
+
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title" id="my-recipes-title">My recipes</h3>
                     <ul class="list-group">
                         {{#each myRecipes}}
                             <li class="list-group-item">
-                                <a id="my-recipes" href="/recipes/{{this._id}}">
-                                    <p>{{this.title}}</p>
+                                <a id="my-profile-my-recipes" href="/recipes/{{this._id}}">
+                                    <p class="my-profile-recipe">{{this.title}}</p>
                                 </a>
                             </li>
                         {{/each}}
@@ -73,7 +81,7 @@
                 </div>
             </div> --}}
 
-            <a href="#" class="btn btn-primary mt-4 btn-block">See new recipes!</a>
+            {{!-- <a href="#" class="btn btn-primary mt-4 btn-block">See new recipes!</a> --}}
         </div>
     </div>
 </div>

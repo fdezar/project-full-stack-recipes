@@ -24,7 +24,7 @@ router.get("/signup", isLoggedOut, (req, res) => {
 
 // POST /auth/signup
 router.post("/signup", isLoggedOut, fileUploader.single('profileImage'), (req, res, next) => {
-  const { username, firstName, lastName, email, password } = req.body;
+  const { username, firstName, lastName, email, aboutMe, password } = req.body;
 
   // Check that username, email, and password are provided
   if (username === "" || firstName === "" || lastName === "" || email === "" || password === "") {
@@ -63,7 +63,8 @@ router.post("/signup", isLoggedOut, fileUploader.single('profileImage'), (req, r
     username: username,
     firstName: firstName,
     lastName: lastName,
-    email: email
+    email: email,
+    aboutMe: aboutMe
   }
 
   if (req.hasOwnProperty('file')) {
@@ -216,7 +217,14 @@ router.post('/:id/edit', isLoggedIn, fileUploader.single('profileImage'), (req, 
       recipesLiked: recipesLiked
   }
 
-  // poner que si no hay mandatory fields pues que esté mal
+  if (username === "" || firstName === "" || lastName === "" || email === "") {
+    res.status(400).render("auth/:id/edit", {
+      errorMessage:
+        "All fields are mandatory.",
+    });
+
+    return;
+  }
 
   if (req.hasOwnProperty('file')) {
       updatedUser.profileImage = req.file.path;

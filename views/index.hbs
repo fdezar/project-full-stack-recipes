@@ -35,8 +35,12 @@
     <h1 class="cover">Welcome to Exquisite</h1>
     <p class="lead cover">Connect with our vibrant community of food enthusiasts. Delight your senses and elevate your culinary experience with our carefully crafted dishes. Explore, savor the flavors, and make each recipe your own. </p>
     <p class="lead">
+      {{#unless user}}
       <a href="auth/signup" class="btn btn-lg fw-bold border-white signup">Sign Up</a>
       <a href="auth/login" class="btn btn-lg fw-bold border-white login">Login</a>
+      {{else}}
+      <a href="/recipes" class="btn btn-lg fw-bold border-white login">Get Started</a>
+      {{/unless}}
     </p>
   </main>
 
