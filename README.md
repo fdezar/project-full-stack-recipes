@@ -14,10 +14,14 @@ The app is built using Handlebars, CSS, MongoDB, Mongoose, JavaScript, Node.js, 
 - **Frontend:**
   - Handlebars
   - CSS
+  - Cloudinary
+  - Bootstrap
+  - FontAwesome
 
 - **Backend:**
   - Node.js
   - Express
+  - Bcrypt
 
 - **Database:**
   - MongoDB
@@ -36,3 +40,8 @@ The app is built using Handlebars, CSS, MongoDB, Mongoose, JavaScript, Node.js, 
 git clone https://github.com/fdezar/project-full-stack-recipes.git
 cd project-full-stack-recipes
 npm install
+```
+
+### Live Link
+
+Coming soon!
