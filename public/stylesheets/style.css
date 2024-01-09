@@ -1,21 +1,5 @@
-/* body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+/* Global stylesheet */
 
-a {
-  color: #00b7ff;
-}
-
-h1 {
-  color: 15px;
-}
-
-img {
-  width: 25%;
-} */
-
-/* Add your custom styles here */
 :root {
   --red-color: rgb(226, 51, 62);
   --white-color: #f8f9fa;
@@ -36,12 +20,15 @@ a {
   background-color: rgb(35, 35, 35);
 }
 
-.navbar-brand, .navbar-toggler, .navbar-toggler-icon {
+.navbar-brand,
+.navbar-toggler,
+.navbar-toggler-icon {
   color: var(--white-color);
 }
 
-.navbar-brand:hover, .navbar-nav .nav-link:hover {
-  color: var(--red-color)
+.navbar-brand:hover,
+.navbar-nav .nav-link:hover {
+  color: var(--red-color);
 }
 
 .navbar-nav .nav-link {
@@ -97,7 +84,7 @@ a {
 }
 
 #search-bar {
-  height: 38px; /* Adjust this value as needed */
+  height: 38px;
 }
 
 #album-div {
@@ -119,7 +106,8 @@ a {
   margin: 0;
 }
 
-#see-user-profile {
+#see-user-profile,
+.edit-delete-recipe {
   color: var(--red-color);
 }
 
@@ -137,7 +125,9 @@ a {
   padding-left: 0.5rem;
 }
 
-.profile-description, .minutes-and-rations, .first-name-last-name-details {
+.profile-description,
+.minutes-and-rations,
+.first-name-last-name-details {
   margin-bottom: 0;
 }
 
@@ -147,7 +137,7 @@ a {
 
 .minutes-and-rations {
   padding-left: 0.35rem;
-  padding-right: 1rem
+  padding-right: 1rem;
 }
 
 #my-recipes-title {
@@ -166,12 +156,38 @@ a {
   margin-bottom: 0;
 }
 
-/* Add more styles as needed */
-
 /* Responsive Styles */
 @media (max-width: 576px) {
   .rounded-circle {
-      width: 40px;
-      height: 40px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 576px) and (max-width: 1199px) {
+  #recipes-images {
+    transform: scale(2.2);
+    transform-origin: 50% 15%;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+  #recipes-images {
+    transform: scale(1.4);
+    transform-origin: 50% 15%;
+  }
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
   }
 }

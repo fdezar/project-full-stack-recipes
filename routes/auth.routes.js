@@ -15,7 +15,7 @@ const User = require("../models/User.model");
 const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
 
-const fileUploader = require('../config/cloudinary.config');
+const fileUploader = require("../config/cloudinary.config");
 
 // GET /auth/signup
 router.get("/signup", isLoggedOut, (req, res) => {
@@ -23,29 +23,40 @@ router.get("/signup", isLoggedOut, (req, res) => {
 });
 
 // POST /auth/signup
-router.post("/signup", isLoggedOut, fileUploader.single('profileImage'), (req, res, next) => {
-  const { username, firstName, lastName, email, aboutMe, password } = req.body;
+router.post(
+  "/signup",
+  isLoggedOut,
+  fileUploader.single("profileImage"),
+  (req, res, next) => {
+    const { username, firstName, lastName, email, aboutMe, password } =
+      req.body;
 
-  // Check that username, email, and password are provided
-  if (username === "" || firstName === "" || lastName === "" || email === "" || password === "") {
-    res.status(400).render("auth/signup", {
-      errorMessage:
-        "All fields are mandatory. Please provide your username, email and password.",
-    });
+    // Check that username, email, and password are provided
+    if (
+      username === "" ||
+      firstName === "" ||
+      lastName === "" ||
+      email === "" ||
+      password === ""
+    ) {
+      res.status(400).render("auth/signup", {
+        errorMessage:
+          "All fields are mandatory. Please provide your username, email and password.",
+      });
 
-    return;
-  }
+      return;
+    }
 
-  if (password.length < 6) {
-    res.status(400).render("auth/signup", {
-      errorMessage: "Your password needs to be at least 6 characters long.",
-    });
+    if (password.length < 6) {
+      res.status(400).render("auth/signup", {
+        errorMessage: "Your password needs to be at least 6 characters long.",
+      });
 
-    return;
-  }
+      return;
+    }
 
-  //   ! This regular expression checks password for special characters and minimum length
-  /*
+    //   ! This regular expression checks password for special characters and minimum length
+    /*
   const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
   if (!regex.test(password)) {
     res
@@ -57,44 +68,51 @@ router.post("/signup", isLoggedOut, fileUploader.single('profileImage'), (req, r
   }
   */
 
-  // Create a new user - start by hashing the password
+    // Create a new user - start by hashing the password
 
-  const newUser = {
-    username: username,
-    firstName: firstName,
-    lastName: lastName,
-    email: email,
-    aboutMe: aboutMe
+    // newUser creation in order to handle image uploading
+    const newUser = {
+      username: username,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      aboutMe: aboutMe,
+    };
+
+    // Handle image gathering
+    if (req.hasOwnProperty("file")) {
+      newUser.profileImage = req.file.path;
+    }
+
+    bcrypt
+      .genSalt(saltRounds)
+      .then((salt) => bcrypt.hash(password, salt))
+      .then((hashedPassword) => {
+        newUser.password = hashedPassword;
+        // Create a user and save it in the database
+        return User.create(
+          newUser /*  { username, email, password: hashedPassword, profileImage: req.file.path } */
+        );
+      })
+      .then((user) => {
+        res.redirect("/auth/login");
+      })
+      .catch((error) => {
+        if (error instanceof mongoose.Error.ValidationError) {
+          res
+            .status(500)
+            .render("auth/signup", { errorMessage: error.message });
+        } else if (error.code === 11000) {
+          res.status(500).render("auth/signup", {
+            errorMessage:
+              "Username and email need to be unique. Provide a valid username or email.",
+          });
+        } else {
+          next(error);
+        }
+      });
   }
-
-  if (req.hasOwnProperty('file')) {
-    newUser.profileImage = req.file.path;
-  }
-
-  bcrypt
-    .genSalt(saltRounds)
-    .then((salt) => bcrypt.hash(password, salt))
-    .then((hashedPassword) => {
-      newUser.password = hashedPassword;
-      // Create a user and save it in the database
-      return User.create(newUser /*  { username, email, password: hashedPassword, profileImage: req.file.path } */ );
-    })
-    .then((user) => {
-      res.redirect("/auth/login");
-    })
-    .catch((error) => {
-      if (error instanceof mongoose.Error.ValidationError) {
-        res.status(500).render("auth/signup", { errorMessage: error.message });
-      } else if (error.code === 11000) {
-        res.status(500).render("auth/signup", {
-          errorMessage:
-            "Username and email need to be unique. Provide a valid username or email.",
-        });
-      } else {
-        next(error);
-      }
-    });
-});
+);
 
 // GET /auth/login
 router.get("/login", isLoggedOut, (req, res) => {
@@ -170,43 +188,49 @@ router.get("/logout", isLoggedIn, (req, res) => {
 });
 
 router.get("/:id", isLoggedIn, (req, res) => {
-    const { id } = req.params;
-    const { currentUser } = req.session;
-
-    User.findById(id)
-      .populate('myRecipes')
-      .then((user) => {
-        if (user.username === currentUser.username) {
-          res.render('auth/my-profile', user);
-        } else {
-          res.redirect('/recipes');
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-
-  // const { currentUser } = req.session;
-  // console.log(req.session);
-  // res.render('auth/my-profile', currentUser);
-});
-
-router.get('/:id/edit', isLoggedIn, (req, res) => {
   const { id } = req.params;
-  
+  const { currentUser } = req.session;
+
   User.findById(id)
-      .then(userFound => {
-          console.log('Recipe found:', userFound)
-          res.render('auth/edit-profile', userFound);
-      })
+    .populate("myRecipes")
+    .then((user) => {
+      if (user.username === currentUser.username) {
+        res.render("auth/my-profile", user);
+      } else {
+        res.redirect("/recipes");
+      }
+    })
+    .catch((err) => {
+      // console.log(err);
+    });
 });
 
-router.post('/:id/edit', isLoggedIn, fileUploader.single('profileImage'), (req, res) => {
+router.get("/:id/edit", isLoggedIn, (req, res) => {
   const { id } = req.params;
-  const { username, firstName, lastName, email,
-          password, aboutMe, myRecipes, recipesLiked } = req.body;
 
-  const updatedUser = {
+  User.findById(id).then((userFound) => {
+    res.render("auth/edit-profile", userFound);
+  });
+});
+
+router.post(
+  "/:id/edit",
+  isLoggedIn,
+  fileUploader.single("profileImage"),
+  (req, res) => {
+    const { id } = req.params;
+    const {
+      username,
+      firstName,
+      lastName,
+      email,
+      password,
+      aboutMe,
+      myRecipes,
+      recipesLiked,
+    } = req.body;
+
+    const updatedUser = {
       username: username,
       firstName: firstName,
       lastName: lastName,
@@ -214,60 +238,71 @@ router.post('/:id/edit', isLoggedIn, fileUploader.single('profileImage'), (req, 
       password: password,
       aboutMe: aboutMe,
       myRecipes: myRecipes,
-      recipesLiked: recipesLiked
-  }
+      recipesLiked: recipesLiked,
+    };
 
-  if (username === "" || firstName === "" || lastName === "" || email === "") {
-    res.status(400).render("auth/:id/edit", {
-      errorMessage:
-        "All fields are mandatory.",
-    });
+    // Handle all mandatory fields
+    if (
+      username === "" ||
+      firstName === "" ||
+      lastName === "" ||
+      email === ""
+    ) {
+      res.status(400).render("auth/:id/edit", {
+        errorMessage: "All fields are mandatory.",
+      });
 
-    return;
-  }
+      return;
+    }
 
-  if (req.hasOwnProperty('file')) {
+    // Handle image gathering
+    if (req.hasOwnProperty("file")) {
       updatedUser.profileImage = req.file.path;
+    }
+
+    User.findByIdAndUpdate(id, updatedUser, { new: true }).then(
+      (userUpdated) => {
+        res.redirect(`/auth/${id}`);
+      }
+    );
   }
+);
 
-  User.findByIdAndUpdate(id, updatedUser, { new: true })
-      .then(userUpdated => {
-          console.log('User updated:', userUpdated);
-          res.redirect(`/auth/${id}`);
-      })
-});
-
-router.get('/:id/delete', (req, res, next) => {
+router.get("/:id/delete", (req, res, next) => {
   const { id } = req.params;
 
   User.findByIdAndDelete(id)
-    .then( () => {
-      res.redirect('/')
-    }).catch( err => next(error) );
+    .then(() => {
+      res.redirect("/");
+    })
+    .catch((err) => next(error));
 });
 
-router.post('/:id/delete', isLoggedIn, (req, res, next) => {
+router.post("/:id/delete", isLoggedIn, (req, res, next) => {
   const { id } = req.params;
 
   User.findByIdAndDelete(id)
-      .then(() => {
-          res.redirect('/');
-      })
-      .catch(err => {
-          next(err);
-      })
+    .then(() => {
+      res.redirect("/");
+    })
+    .catch((err) => {
+      next(err);
+    });
 });
 
-router.get('/:id/delete-image', (req, res, next) => {
+router.get("/:id/delete-image", (req, res, next) => {
   const { id } = req.params;
 
-  User.findOneAndUpdate({ "_id": id }, { profileImage: "/images/default-icon.png" } )
-    .then( () => {
+  User.findOneAndUpdate(
+    { _id: id },
+    { profileImage: "/images/default-icon.png" }
+  )
+    .then(() => {
       res.redirect(`/auth/${id}/edit`);
     })
-    .catch(err => {
+    .catch((err) => {
       next(err);
-    })
+    });
 });
 
 module.exports = router;

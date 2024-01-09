@@ -1,142 +1,97 @@
-{{!-- <img src={{recipe.image}} alt="recipe-image" />
-
-<h1>{{recipe.title}}</h1>
-
-<img src={{recipe.user.profileImage}} alt="profile-image" />
-<p>{{recipe.user.username}}</p>
-
-<p>{{recipe.description}}</p>
-
-<!-- edit this -->
-{{#if canEdit }}
-<a href="/recipes/{{recipe._id}}/edit">
-  Edit recipe
-</a>
-<a href="/recipes/{{recipe._id}}/delete">Delete recipe</a>
-{{/if}}
-
-<h3>Ingredients</h3>
-
-<ul>
-    {{#each recipe.ingredients}}
-    <li>{{this}}</li>
-    {{/each}}
-</ul>
-
-<h3>Duration</h3>
-
-<p>{{recipe.duration}}</p>
-
-<h3>Rations</h3>
-
-<p>{{recipe.rations}}</p>
-
-<p>Hacer un split a un array antes de renderizar el hbs hacer un split del hbs para que sea un array cuando llegue. Hacer la funcion </p>
-
-<h3>Recipe Steps</h3>
-
-<p>{{recipe.steps}}</p>
-
-<h3>Likes</h3>
-
-<p>Likes received:</p>
-<a href="#">Like this recipe</a>
-
-<h3>Comments</h3>
-
-{{#unless recipe.comments}}
-  <p>No comments yet!</p>
-{{/unless}}
- 
-{{#each recipe.comments}}
-  <p><b>{{this.author}}:</b> {{this.content}}</p>
-{{/each}}
-
-<hr>
- 
-<h3>Add comment</h3>
- 
-<form action="/recipes/{{recipe._id}}/comment" method="post">
-  Comment: <br>
-  {{!-- <input type="text" name="postAuthor" value="{{author.username}}" hidden /> --}}
-  {{!-- <textarea name="content" cols="30" rows="2"></textarea>
- <br>
-  <button type="submit">Comment</button>
-</form> --}}
-
-
-{{!-- <hr>
-<a href="/auth/{{recipe.user._id}}">See {{recipe.user.username}}'s profile </a> --}}
-
 <div class="container mt-5">
-    <div class="row">
-        <div class="col-md-6">
-            <img src="{{recipe.image}}" class="img-fluid" alt="recipe-image">
-        </div>
+  <div class="row">
 
-        <div class="col-md-6">
-            <h1>{{recipe.title}}</h1>
-
-            <hr>
-
-            <div class="d-flex align-items-center">
-                <a id="profile-recipe-details" href="/auth/{{recipe.user._id}}">
-                    <div class="d-flex">
-                        <img src="{{recipe.user.profileImage}}" class="img-fluid rounded-circle" alt="profile-image">
-                        <div class="d-flex flex-column first-name-last-name-div">
-                        <p class="first-name-last-name-details"><b>{{recipe.user.firstName}} {{recipe.user.lastName}}</b></p>
-                        <p class="first-name-last-name-details ml-2">@{{recipe.user.username}}</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <hr>
-
-            <p>{{recipe.description}}</p>
-
-            {{#if canEdit }}
-                <a href="/recipes/{{recipe._id}}/edit" class="btn btn-primary">Edit recipe</a>
-                <a href="/recipes/{{recipe._id}}/delete" class="btn btn-danger">Delete recipe</a>
-            {{/if}}
-
-            <hr>
-
-            <h3>Ingredients</h3>
-            
-            <div class="d-flex align-items-center minutes-and-rations-div">
-                <i class="fa-regular fa-clock"></i><p class="minutes-and-rations">{{recipe.duration}} minutes</p>
-                <i class="fa-regular fa-user"></i><p class="minutes-and-rations">{{recipe.rations}} rations</p>
-            </div>
-
-            <p>{{recipe.ingredients}}</p>
-
-            <hr>
-
-            <h3>Recipe Steps</h3>
-            <p>{{recipe.steps}}</p>
-
-            {{!-- <h3>Likes</h3>
-            <p>Likes received:</p>
-            <a href="#" class="btn btn-success">Like this recipe</a> --}}
-
-            <hr>
-
-            <h3>Comments</h3>
-            {{#unless recipe.comments}}
-                <p>No comments yet!</p>
-            {{/unless}}
-            
-            {{#each recipe.comments}}
-                <p><b>{{this.author}}:</b> {{this.content}}</p>
-            {{/each}}
-
-            <h3>Add comment</h3>
-            <form action="/recipes/{{recipe._id}}/comment" method="post">
-                <textarea name="content" cols="30" rows="2" class="form-control"></textarea>
-                <br>
-                <button type="submit" class="btn btn-primary">Comment</button>
-            </form>
-        </div>
+    <!-- Image -->
+    <div class="col-md-6">
+      <img src="{{recipe.image}}" class="img-fluid" alt="recipe-image" />
     </div>
+
+    <div class="col-md-6">
+      <h1>{{recipe.title}}</h1>
+
+        <!-- Edit and delete buttons show if user is the author of the recipe -->
+      {{#if canEdit}}
+        <a href="/recipes/{{recipe._id}}/edit" class="edit-delete-recipe">Edit
+          recipe</a>
+        |
+        <a
+          href="/recipes/{{recipe._id}}/delete"
+          class="edit-delete-recipe"
+        >Delete recipe</a>
+      {{/if}}
+
+      <hr />
+
+        <!-- User profile container -->
+      <div class="d-flex align-items-center">
+        <a id="profile-recipe-details" href="/auth/{{recipe.user._id}}">
+          <div class="d-flex">
+            <img
+              src="{{recipe.user.profileImage}}"
+              class="img-fluid rounded-circle"
+              alt="profile-image"
+            />
+            <div class="d-flex flex-column first-name-last-name-div">
+              <p class="first-name-last-name-details"><b
+                >{{recipe.user.firstName}} {{recipe.user.lastName}}</b></p>
+              <p
+                class="first-name-last-name-details ml-2"
+              >@{{recipe.user.username}}</p>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <hr />
+
+      <p>{{recipe.description}}</p>
+
+      <hr />
+
+      <h3>Ingredients</h3>
+
+      <div class="d-flex align-items-center minutes-and-rations-div">
+        <i class="fa-regular fa-clock"></i><p
+          class="minutes-and-rations"
+        >{{recipe.duration}} minutes</p>
+        <i class="fa-regular fa-user"></i><p
+          class="minutes-and-rations"
+        >{{recipe.rations}} rations</p>
+      </div>
+
+      <p>{{recipe.ingredients}}</p>
+
+      <hr />
+
+      <h3>Recipe Steps</h3>
+      <p>{{recipe.steps}}</p>
+
+      {{! <h3>Likes</h3>
+            <p>Likes received:</p>
+            <a href="#" class="btn btn-success">Like this recipe</a> }}
+
+      <hr />
+
+      <h3>Comments</h3>
+      {{#unless recipe.comments}}
+        <p>No comments yet!</p>
+      {{/unless}}
+
+      {{#each recipe.comments}}
+        <p><b>{{this.author}}:</b> {{this.content}}</p>
+      {{/each}}
+
+      <h3>Add comment</h3>
+      <form action="/recipes/{{recipe._id}}/comment" method="post">
+        <textarea
+          name="content"
+          cols="30"
+          rows="2"
+          class="form-control"
+        ></textarea>
+        <br />
+        <button type="submit" class="btn btn-primary">Comment</button>
+      </form>
+    </div>
+  </div>
 </div>

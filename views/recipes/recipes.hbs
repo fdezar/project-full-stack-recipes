@@ -1,54 +1,17 @@
-<head>
-   <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
+ <!-- Main recipes section -->
 
-      @media (min-width: 576px) and (max-width: 1199px) {
-        #recipes-images {
-          transform: scale(2.2);
-          transform-origin: 50% 15%;
-        }
-      }
-
-      @media (min-width: 1200px) and (max-width: 1399px) {
-        #recipes-images {
-          transform: scale(1.4);
-          transform-origin: 50% 15%;
-        }
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-
-</head>
-  <body>
-    
-<main>
-
+  <!-- Header section -->
   <section class="pb-5 text-center container main-section">
     <div class="row pt-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
         <h1 class="fw-light">Recipes</h1>
         <p class="lead text-muted">Explore a world of culinary delights with our carefully curated recipes. Each dish is crafted with love and precision.</p>
-        {{!-- <form action="/recipes/search" method="GET">
-            <input type="search" name="query" id="search-bar"/>
-            <button type="submit" id="submit-button" class="btn btn-primary my-2">Search</button>
-        </form> --}}
+        
          <form action="/recipes/search" method="GET" class="form-inline">
           <div class="input-group">
             <input type="search" class="form-control" placeholder="Search some recipes..." name="query" id="search-bar"/>
             <button type="submit" id="submit-button" class="btn btn-primary">Search</button>
-            {{!-- <div class="input-group-append">
-            </div> --}}
+           
           </div>
         </form>
       </div>
@@ -62,23 +25,21 @@
         {{#each recipesFound}}  
         <div class="col">
           <div class="card shadow-sm">
-            {{!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"> --}}
-                <title>Placeholder</title>
-                <!-- <rect width="100%" height="100%" fill="#55595c"/> -->
+            
+                <!-- Image container -->
                 <div id="image-recipe-container">
                   <a href="recipes/{{this._id}}"><img src="{{this.image}}" id="recipes-images" width="100%" preserveAspectRatio="xMidYMid slice" /></a>
                 </div>
                 <text x="50%" y="50%" fill="#eceeef" dy=".3em"></text>
-            
-            </svg>
 
+            <!-- Title, details and duration container -->
             <div class="card-body">
                 <h5><strong>{{this.title}}</strong></h5>
-              <!-- <p class="card-text">{{this.origin}}This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
+             
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-secondary details"><a href="recipes/{{this._id}}">Details</a></button>
-                  <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Like</button> -->
+                 
                 </div>
                 <small class="text-muted">{{this.duration}} mins</small>
               </div>
@@ -93,19 +54,11 @@
 
 </main>
 
+  <!-- Footer -->
 <footer class="text-muted">
   <div class="container">
     <p class="mb-1">
       <a id="back-to-top" href="#">Back to top</a>
     </p>
-    {{!-- <p class="mb-1">Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-    <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="../getting-started/introduction/">getting started guide</a>.</p> --}}
   </div>
 </footer>
-
-
-    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-
-      
-  </body>
-</html>

@@ -225,6 +225,24 @@ const recipes = [
             "Fresh parsley for garnish"
           ],
           steps: "1. In a bowl, mix together flour, garlic powder, smoked paprika, salt, and black pepper. \n2. Heat vegetable oil in a deep pan or fryer to 350°F (175°C). \n3. Dredge the cleaned anchovies in the seasoned flour mixture, shaking off excess. \n4. Carefully place the coated anchovies into the hot oil and fry until golden brown and crispy, about 2-3 minutes. \n5. Use a slotted spoon to remove the fried anchovies and place them on a paper towel-lined plate to drain excess oil. \n6. Serve hot, garnished with fresh parsley and lemon wedges for squeezing over the top.",
+    },
+    {
+      title: "Spanish Tortilla",
+      description: "A classic Spanish omelette with potatoes and onions.",
+      origin: "Spain",
+      level: "Intermediate",
+      rations: 4,
+      duration: 30,
+      isVegetarian: true,
+      isVegan: false,
+      ingredients: [
+        "4 potatoes", 
+        "1 onion", 
+        "6 eggs", 
+        "olive oil", 
+        "salt", 
+        "pepper"],
+      steps: "1. Peel and thinly slice the potatoes and onion.\n2. Fry them in olive oil until golden.\n3. Beat the eggs and season with salt and pepper.\n4. Mix the eggs with the fried potatoes and onion.\n5. Pour the mixture into a pan and cook until set.\n6. Flip the tortilla and cook the other side.\n7. Serve and enjoy!",
     }
 ];
 

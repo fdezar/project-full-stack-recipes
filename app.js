@@ -24,12 +24,12 @@ const projectName = "project-full-stack-recipes";
 
 app.locals.appTitle = `${capitalize(projectName)} created with IronLauncher`;
 
-app.use(function(req, res, next) {
-    if (req.session.currentUser) {
-      res.locals.user = req.session.currentUser;
-    }
-    next();
-  });
+app.use(function (req, res, next) {
+  if (req.session.currentUser) {
+    res.locals.user = req.session.currentUser;
+  }
+  next();
+});
 
 // 👇 Start handling routes here
 const indexRoutes = require("./routes/index.routes");

@@ -1,40 +1,7 @@
-{{!-- <h2>Welcome {{username}} to your profile page!</h2>
-
-<a href="">Edit Credentials</a>
-<a href="">Delete Account</a>
-
-<img src={{profileImage}} alt="user-icon" />
-
-<div id="credentials">
-    <h3>{{firstName}} {{lastName}}</h3>
-    <p>Username: {{username}}</p>
-    <p>Email: {{email}}</p>
-    <a href="#">Edit profile</a>
-</div>
-
-<div id="my-recipes">
-    <h3>My recipes</h3>
-    <ul>
-    {{#each myRecipes}}
-        <li>
-            <a href="/recipes/{{this._id}}"><p>{{this.title}}</p></a>
-            
-        </li>
-    {{/each}}
-    </ul>
-</div>
-
-<a href="#">Create a new Recipe</a>
-
-<div id="recipes-liked">
-    <h3>Recipes Liked</h3>
-</div>
-
-<a href="#">See new recipes!</a> --}}
-
 <div class="container mt-5">
     <h2 class="text-center mb-4">Welcome {{username}} to your profile page!</h2>
 
+    <!-- User container -->
     <div class="row">
         <div class="col-md-4">
             <div class="card mb-4">
@@ -49,6 +16,7 @@
             </div>
         </div>
 
+        <!-- About container -->
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
@@ -57,6 +25,7 @@
                 </div>
             </div>
 
+        <!-- User's recipes container -->
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
@@ -81,7 +50,6 @@
                 </div>
             </div> --}}
 
-            {{!-- <a href="#" class="btn btn-primary mt-4 btn-block">See new recipes!</a> --}}
         </div>
     </div>
 </div>

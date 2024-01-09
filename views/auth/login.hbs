@@ -1,48 +1,13 @@
-{{!-- <div id="login-form">
-  <h2>Welcome back!</h2>
-  <form action="/auth/login" method="POST">
-
-    <label> Email
-      <input type="text" name="email" placeholder="Your email" />
-    </label>
-
-    <label> Password
-      <input type="password" name="password" placeholder="Your password" />
-    </label>
-
-    <button type="submit">Log In</button>
-
-    {{#if errorMessage}}
-      <p class="error">{{errorMessage}}</p>
-    {{/if}}
-  </form>
-</div> --}}
-
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-
-    
-    <!-- Custom styles for this template -->
-    <link href="/stylesheets/signin.css" rel="stylesheet">
+  <head>
+    <!-- Specific stylesheet for login page -->  
+    <link href="/stylesheets/login.css" rel="stylesheet">
   </head>
   <body class="text-center">
     
+  <!-- Main container -->
 <main class="form-signin">
   <form action="/auth/login" method="POST">
-    {{!-- <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> --}}
+    
     <h1 class="h3 mb-3 fw-normal">Welcome back!</h1>
 
     <div class="form-floating">
@@ -58,8 +23,6 @@
   </form>
   <a href="/auth/signup" class="mt-5 mb-3 text-muted">Or signup if you don't have an account</a>
 </main>
-
-
     
   </body>
 </html>
