@@ -77,11 +77,21 @@
         <div class="col-md-6">
             <h1>{{recipe.title}}</h1>
 
+            <hr>
+
             <div class="d-flex align-items-center">
-                <img src="{{recipe.user.profileImage}}" class="img-fluid rounded-circle" alt="profile-image">
-                <p>{{recipe.user.firstName}} {{recipe.user.lastName}}</p>
-                <p class="ml-2">@{{recipe.user.username}}</p>
+                <a id="profile-recipe-details" href="/auth/{{recipe.user._id}}">
+                    <div class="d-flex">
+                        <img src="{{recipe.user.profileImage}}" class="img-fluid rounded-circle" alt="profile-image">
+                        <div class="d-flex flex-column first-name-last-name-div">
+                        <p class="first-name-last-name-details"><b>{{recipe.user.firstName}} {{recipe.user.lastName}}</b></p>
+                        <p class="first-name-last-name-details ml-2">@{{recipe.user.username}}</p>
+                        </div>
+                    </div>
+                </a>
             </div>
+
+            <hr>
 
             <p>{{recipe.description}}</p>
 
@@ -90,12 +100,18 @@
                 <a href="/recipes/{{recipe._id}}/delete" class="btn btn-danger">Delete recipe</a>
             {{/if}}
 
+            <hr>
+
             <h3>Ingredients</h3>
+            
+            <div class="d-flex align-items-center minutes-and-rations-div">
+                <i class="fa-regular fa-clock"></i><p class="minutes-and-rations">{{recipe.duration}} minutes</p>
+                <i class="fa-regular fa-user"></i><p class="minutes-and-rations">{{recipe.rations}} rations</p>
+            </div>
+
             <p>{{recipe.ingredients}}</p>
 
-            <i class="fa-regular fa-clock"></i><p>{{recipe.duration}} minutes</p>
-
-            <i class="fa-regular fa-user"></i><p>{{recipe.rations}} rations</p>
+            <hr>
 
             <h3>Recipe Steps</h3>
             <p>{{recipe.steps}}</p>
@@ -103,6 +119,8 @@
             {{!-- <h3>Likes</h3>
             <p>Likes received:</p>
             <a href="#" class="btn btn-success">Like this recipe</a> --}}
+
+            <hr>
 
             <h3>Comments</h3>
             {{#unless recipe.comments}}
@@ -113,18 +131,12 @@
                 <p><b>{{this.author}}:</b> {{this.content}}</p>
             {{/each}}
 
-            <hr>
-
             <h3>Add comment</h3>
             <form action="/recipes/{{recipe._id}}/comment" method="post">
                 <textarea name="content" cols="30" rows="2" class="form-control"></textarea>
                 <br>
                 <button type="submit" class="btn btn-primary">Comment</button>
             </form>
-
-            <hr>
-            
-            <a href="/auth/{{recipe.user._id}}" class="btn btn-info">See {{recipe.user.username}}'s profile</a>
         </div>
     </div>
 </div>

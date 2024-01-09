@@ -119,6 +119,10 @@ a {
   margin: 0;
 }
 
+#see-user-profile {
+  color: var(--red-color);
+}
+
 #back-to-top {
   color: #333;
 }
@@ -129,12 +133,29 @@ a {
   width: 8rem;
 }
 
-.profile-description {
+.first-name-last-name-div {
+  padding-left: 0.5rem;
+}
+
+.profile-description, .minutes-and-rations, .first-name-last-name-details {
   margin-bottom: 0;
+}
+
+.minutes-and-rations-div {
+  margin-bottom: 1rem;
+}
+
+.minutes-and-rations {
+  padding-left: 0.35rem;
+  padding-right: 1rem
 }
 
 #my-recipes-title {
   padding-bottom: 0.5rem;
+}
+
+#profile-recipe-details {
+  color: #333;
 }
 
 #my-profile-my-recipes {

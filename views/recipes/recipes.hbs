@@ -8,6 +8,20 @@
         user-select: none;
       }
 
+      @media (min-width: 576px) and (max-width: 1199px) {
+        #recipes-images {
+          transform: scale(2.2);
+          transform-origin: 50% 15%;
+        }
+      }
+
+      @media (min-width: 1200px) and (max-width: 1399px) {
+        #recipes-images {
+          transform: scale(1.4);
+          transform-origin: 50% 15%;
+        }
+      }
+
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
@@ -66,7 +80,7 @@
                   <button type="button" class="btn btn-sm btn-outline-secondary details"><a href="recipes/{{this._id}}">Details</a></button>
                   <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Like</button> -->
                 </div>
-                <small class="text-muted">9 mins</small>
+                <small class="text-muted">{{this.duration}} mins</small>
               </div>
             </div>
           </div>
