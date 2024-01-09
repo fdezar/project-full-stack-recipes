@@ -156,20 +156,20 @@ a {
   margin-bottom: 0;
 }
 
-/* Responsive Styles */
-@media (max-width: 576px) {
-  .rounded-circle {
-    width: 40px;
-    height: 40px;
-  }
-}
-
 .bd-placeholder-img {
   font-size: 1.125rem;
   text-anchor: middle;
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
+}
+
+/* Responsive Styles */
+@media (max-width: 576px) {
+  .rounded-circle {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 @media (min-width: 576px) and (max-width: 1199px) {
