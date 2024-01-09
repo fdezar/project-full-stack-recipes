@@ -22,6 +22,7 @@ a {
 
 .navbar-brand,
 .navbar-toggler,
+.collapsed,
 .navbar-toggler-icon {
   color: var(--white-color);
 }

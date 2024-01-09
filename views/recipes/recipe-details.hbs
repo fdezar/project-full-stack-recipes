@@ -24,7 +24,7 @@
 
         <!-- User profile container -->
       <div class="d-flex align-items-center">
-        <a id="profile-recipe-details" href="/auth/{{recipe.user._id}}">
+        {{!-- <a id="profile-recipe-details" href="/auth/{{recipe.user._id}}"> --}}
           <div class="d-flex">
             <img
               src="{{recipe.user.profileImage}}"
@@ -39,7 +39,7 @@
               >@{{recipe.user.username}}</p>
             </div>
           </div>
-        </a>
+        {{!-- </a> --}}
       </div>
 
       <hr />
