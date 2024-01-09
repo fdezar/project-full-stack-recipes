@@ -1,4 +1,4 @@
-# About Exquisite
+# Exquisite, a Full Stack recipe web application
 
 Exquisite is a web application for managing and sharing recipes. Users can create and view recipes of others or his own. They also can edit, and delete recipes or accounts of his own.
 The app is built using Handlebars, CSS, MongoDB, Mongoose, JavaScript, Node.js, and Express.
