@@ -44,4 +44,4 @@ npm install
 
 ### Live Link
 
-Coming soon!
+https://exquisite-project.vercel.app/

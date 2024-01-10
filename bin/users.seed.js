@@ -9,7 +9,7 @@ const users = [
       firstName: "John",
       lastName: "Doe",
       email: "john@example.com",
-      password: "password123",
+      password: "Admin1",
       aboutMe: "I am a passionate home cook with a love for trying out diverse recipes from around the world. Cooking brings joy to my life, and I enjoy sharing my culinary creations with friends and family.",
     },
     {
