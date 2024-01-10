@@ -1,17 +1,23 @@
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Welcome {{username}} to your profile page!</h2>
+    {{#if canEdit }}
+    <h2 class="text-center mb-4">Welcome {{user.username}} to your profile page!</h2>
+    {{else}}
+    <h2 class="text-center mb-4">Welcome to {{user.username}}'s profile page!</h2>
+    {{/if}}
 
     <!-- User container -->
     <div class="row">
         <div class="col-md-4">
             <div class="card mb-4">
-                <img src="{{profileImage}}" id="user-icon" class="card-img-top rounded-circle" alt="user-icon">
+                <img src="{{user.profileImage}}" id="user-icon" class="card-img-top rounded-circle" alt="user-icon">
                 <div class="card-body">
-                    <h3 class="card-title">{{firstName}} {{lastName}}</h3>
-                    <p class="card-text profile-description">@{{username}}</p>
-                    <p class="card-text profile-description">{{email}}</p>
-                    <a href="/auth/{{_id}}/edit" class="btn btn-outline-dark exclude-btn">Edit Profile</a>
-                    <a href="/auth/{{_id}}/delete" class="btn btn-outline-danger exclude-btn">Delete Profile</a>
+                    <h3 class="card-title">{{user.firstName}} {{user.lastName}}</h3>
+                    <p class="card-text profile-description">@{{user.username}}</p>
+                    <p class="card-text profile-description">{{user.email}}</p>
+                    {{#if canEdit }}
+                    <a href="/auth/{{user._id}}/edit" class="btn btn-outline-dark exclude-btn">Edit Profile</a>
+                    <a href="/auth/{{user._id}}/delete" class="btn btn-outline-danger exclude-btn">Delete Profile</a>
+                    {{/if}}
                 </div>
             </div>
         </div>
@@ -31,7 +37,7 @@
                 <div class="card-body">
                     <h3 class="card-title" id="my-recipes-title">My recipes</h3>
                     <ul class="list-group">
-                        {{#each myRecipes}}
+                        {{#each user.myRecipes}}
                             <li class="list-group-item">
                                 <a id="my-profile-my-recipes" href="/recipes/{{this._id}}">
                                     <p class="my-profile-recipe">{{this.title}}</p>

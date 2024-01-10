@@ -190,15 +190,17 @@ router.get("/logout", isLoggedIn, (req, res) => {
 router.get("/:id", isLoggedIn, (req, res) => {
   const { id } = req.params;
   const { currentUser } = req.session;
+  let canEdit = false;
 
   User.findById(id)
     .populate("myRecipes")
     .then((user) => {
-      if (user.username === currentUser.username) {
-        res.render("auth/my-profile", user);
-      } else {
-        res.redirect("/recipes");
+      
+      if (req.session.currentUser._id === user._id.toString()) {
+        canEdit = true;
       }
+
+      res.render("auth/my-profile", { user, canEdit });
     })
     .catch((err) => {
       // console.log(err);
