@@ -35,7 +35,11 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
+                    {{#if canEdit }}
                     <h3 class="card-title" id="my-recipes-title">My recipes</h3>
+                    {{else}}
+                    <h3 class="card-title" id="my-recipes-title">{{user.username}}'s recipes</h3>
+                    {{/if}}
                     <ul class="list-group">
                         {{#each user.myRecipes}}
                             <li class="list-group-item">
@@ -45,7 +49,10 @@
                             </li>
                         {{/each}}
                     </ul>
+
+                    {{#if canEdit}}
                     <a href="/recipes/create" class="btn btn-success mt-3">Create a new Recipe</a>
+                    {{/if}}
                 </div>
             </div>
 
