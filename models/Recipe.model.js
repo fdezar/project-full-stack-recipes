@@ -44,10 +44,10 @@ const recipeSchema = new Schema(
             default: todayDate
         },
         likes: [ Schema.Types.ObjectId ],
-        comments: {
+        comments: [{
             type: Schema.Types.ObjectId,
             ref: "Comment"
-        }
+        }]
     },
     {
         timestamps: true

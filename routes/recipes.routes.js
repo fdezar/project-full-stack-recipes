@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Recipe = require("../models/Recipe.model");
 const User = require("../models/User.model");
+const Comment = require("../models/Comment.model");
 
 const isLoggedIn = require("../middleware/isLoggedIn");
 
@@ -98,19 +99,14 @@ router.get("/:id", (req, res) => {
 
   Recipe.findById(id)
     .populate("user")
-    .populate("comments")
-    // .populate({
-    //     path: "author",
-    //     select: "username -_id"
-    // })
-    // .populate({
-    //     path: "comments",
-    //     select: "content -_id",
-    //     populate: {
-    //         path: "author",
-    //         select: "username -_id"
-    //     }
-    // })
+    .populate({
+        path: "comments",
+        select: "content -_id",
+        populate: {
+            path: "author",
+            select: "username -_id"
+        }
+    })
     .then((recipe) => {
       if (!req.session.currentUser) {
         res.redirect("/auth/signup");
@@ -121,6 +117,7 @@ router.get("/:id", (req, res) => {
         canEdit = true;
       }
 
+      console.log(recipe);
       res.render("recipes/recipe-details", { recipe, canEdit });
     })
     .catch((err) => {
