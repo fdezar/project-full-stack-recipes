@@ -40,7 +40,11 @@
                 <input type="file" class="form-control-file" id="profileImage" name="profileImage">
             </div>
 
-            <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+            <button type="submit" class="btn btn-primary btn-block" id="submit-signup">Sign Up</button>
+
+            <br>
+
+            <a href="/auth/login" class="mt-5 mb-3 text-muted">Or login if you already have an account</a>
 
             {{#if errorMessage}}
                 <p class="error mt-3">{{errorMessage}}</p>

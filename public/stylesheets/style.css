@@ -107,6 +107,10 @@ a {
   margin: 0;
 }
 
+#submit-signup {
+  margin-bottom: 10px;
+}
+
 #see-user-profile,
 .edit-delete-recipe {
   color: var(--red-color);
