@@ -42,6 +42,6 @@ cd project-full-stack-recipes
 npm install
 ```
 
-### Live Link 🌐
+### Deploy Link 🌐
 
 https://exquisite-project.vercel.app/
